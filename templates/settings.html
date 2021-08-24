@@ -7,6 +7,14 @@
 </head>
 <body>
 	{% block content %}
+	<nav>
+		<ul>
+			<li><a href="/codes">Luo koodeja</a></li>
+			<li><a href="/database">Tietokanta</a></li>
+			<li><a href="/settings">Asetukset</a></li>
+			<li><a href="/logout">Kirjaudu ulos</a></li>
+		</ul>
+	</nav>
 	<h2>Tervetuloa, {{ session.username }}!</h2>
 	{% endblock %}
 </body>
