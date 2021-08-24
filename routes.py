@@ -11,10 +11,6 @@ from db import db
 def index():
     return render_template("index.html")
     
-@app.route("/")
-def home():
-    return render_template("home.html")
-    
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
@@ -38,7 +34,7 @@ def login():
 @app.route("/logout")
 def logout():
     del session["username"]
-    return redirect("/")
+    return redirect("/admin")
     
 @app.route("/settings", methods=["POST", "GET"])
 def settings():
@@ -83,3 +79,18 @@ def validate_password(password1, password2):
         
     return None
     
+@app.route("/")
+def home():
+    return render_template("home.html")
+    
+@app.route("/join",  methods=["POST"])
+def join():
+    return render_template("chat.html")
+    
+@app.route("/codes",  methods=["GET", "POST"])
+def create_codes():
+    return render_template("codes.html")
+    
+@app.route("/database",  methods=["GET", "POST"])
+def update_database():
+    return render_template("database.html")
