@@ -4,6 +4,8 @@ from app import app
 from flask import Flask
 from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
+import secrets
+from db import db
 
 @app.route("/")
 def index():
@@ -13,7 +15,7 @@ def index():
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    sql = "SELECT password, id FROM admin WHERE username=:username"
+    sql = "SELECT password, id FROM aicb.admin WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
     
@@ -45,7 +47,7 @@ def register():
     if len(username) > 25 or len(username) < 3:
         return render_template("index.html", message=("Liian lyhyt tai pitkä käyttäjänimi! Nimen tulee olla vähintään 3 merkkiä ja enintään 25 merkkiä pitkä."))
     
-    sql = "SELECT COUNT(id) FROM admin WHERE username=(:username)"
+    sql = "SELECT COUNT(id) FROM aicb.admin WHERE username=(:username)"
     result = db.session.execute(sql, {"username":username})
     count = result.fetchone()[0]
     
@@ -62,7 +64,7 @@ def register():
     
     hash_value = generate_password_hash(password1)
 
-    sql = "INSERT INTO admin (username, password) VALUES(:username, :password)"
+    sql = "INSERT INTO aicb.admin (username, password) VALUES(:username, :password)"
     db.session.execute(sql, {"username":username,"password":hash_value})
     db.session.commit()
 
