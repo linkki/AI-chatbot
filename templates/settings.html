@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	{% extends "layout.html" %}
+	{% block title %}Admin-sivu{% endblock %}
+</head>
+<body>
+	{% block content %}
+	<h2>Tervetuloa, {{ session.username }}!</h2>
+	{% endblock %}
+</body>
+</html>

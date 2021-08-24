@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Kirjaudu
+	</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+	<div class="header">
+		<h1>
+			Tekoälychatti
+		</h1>
+	</div>
+	{% if message %}
+	<div class="message">
+		{{ message }}
+	</div>
+	{% endif %}
+	<div class="floating">
+		<h3>Kirjaudu sisään</h3>
+		<form action="/login" method="POST">
+			<p>Käyttäjätunnus:<br>
+				<input type="text" name="username">
+			</p>
+			<p>Salasana:<br>
+				<input type="password" name="password">
+			</p>
+			<input type="submit" text="Kirjaudu" class="is-circle">
+		</form>
+	</div>
+	<h3>Rekisteröidy käyttäjäksi</h3>
+	<form action="/register" method="POST" onsubmit="return check(this)">
+		<p>Käyttäjätunnus:<br>
+			<input type="text" name="username">
+		</p>
+		<p>Salasana:<br>
+			<input type="password" name="password1">
+		</p>
+		<p>Salasana uudestaan:<br>
+			<input type="password" name="password2">
+		</p>
+		<button type="submit">Rekisteröidy</button>
+	</form>
+</body>
