@@ -7,9 +7,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
 from db import db
 
-@app.route("/")
+@app.route("/admin")
 def index():
     return render_template("index.html")
+    
+@app.route("/")
+def home():
+    return render_template("home.html")
     
 @app.route("/login", methods=["POST"])
 def login():
@@ -37,7 +41,7 @@ def logout():
     return redirect("/")
     
 @app.route("/settings", methods=["POST", "GET"])
-def home():
+def settings():
     return render_template("settings.html")
     
 @app.route("/register", methods=["POST"])
