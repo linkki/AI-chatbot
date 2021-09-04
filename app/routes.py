@@ -1,11 +1,10 @@
 # Copyright (c) 2021 Veera Lupunen
 
-from app import app
-from flask import Flask
+from . import app
+from .db import db
 from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
-from db import db
 
 @app.route("/admin")
 def index():

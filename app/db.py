@@ -1,6 +1,6 @@
 # Copyright (c) 2021 Veera Lupunen
 
-from app import app
+from . import app
 from flask_sqlalchemy import SQLAlchemy
 from os import getenv
 
