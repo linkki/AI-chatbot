@@ -1,0 +1,54 @@
+/* (c) Copyright Veera Lupunen 2021
+Colours: Kaneli Kalliokoski
+*/
+
+body {
+    margin: auto;
+    max-width: 75em;
+	padding: 0 3em;
+	background-color: #BEC3BD;
+}
+
+.header {
+	background-color: #34E700;
+	margin: 0 -3em;
+	padding: 2em 0;
+}
+
+h1 {
+	text-align: center;
+	font-family: 'Nadeem';
+	font-size: 3em;
+}
+
+nav {
+	display: flex;
+	justify-content: center;
+}
+
+nav li {
+	display: inline-block;
+}
+
+nav li a {
+	display: inline-block;
+    text-decoration: none;
+    color: #FFF;
+	padding: 1em;
+	border: 1px solid #848484;
+	background-color: #848484;
+	font-size: 1em;
+	font-family: 'Nadeem';
+	text-align: center;
+}
+
+#chatbox {
+	background-color: white;
+}
+
+#writing-area {
+	background-color: white;
+}
+
+
+
