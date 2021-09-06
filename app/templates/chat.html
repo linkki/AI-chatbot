@@ -1,16 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
 	{% extends "layout.html" %}
 	{% block title %}Tekoälychatti{% endblock %}
-</head>
-<body>
-	{% block content %}
-	<h2>Tervetuloa juttelemaan!</h2>
-	<p>Tehtävänäsi on kysyä kysymyksiä ja pyrkiä selvittämään, jutteletko ihmisen vai tietokoneen kanssa. Aloita antamalla oma nimesi ja ohjaajalta saamasi koodi. Kivaa keskustelua!</p>
-	<br>
-	<p>Tähän tulee chattiboksi.</p>
-	{% endblock %}
-</body>
-</html>
+	{% block head %}
+	<script src="https://cdn.socket.io/4.1.2/socket.io.min.js" integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(function() {
+			'use strict';
+			const socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
+			
+			socket.on('connect', function() {
+				socket.emit('joined', {});
+			});
+			
+			socket.on('message', function(data) {
+				const messages = $('#chatbox');
+				const newMessage = $('<div class="new-message"></div>');
+				
+				const sender = $('<span class="sender-name"></span>');
+				sender.text(data.name);
+				const content = $('<span class="message"></span>'); 
+				content.text(data.message);
+				
+				newMessage.append(sender, content);
+				messages.append(newMessage);
+			});
+			
+			$('#send-message').on('submit', function(evnt) {
+				evnt.preventDefault();
+				const message = $('#writing-area').val();
+				socket.emit('text', message);
+				$('#writing-area').val("");
+			});
+		});
+		</script>
+		{% endblock %}
+	</head>
+	<body>
+		{% block content %}
+		<h2>Tervetuloa juttelemaan!</h2>
+		<p>Tehtävänäsi on kysyä kysymyksiä ja pyrkiä selvittämään, jutteletko ihmisen vai tietokoneen kanssa. Aloita antamalla oma nimesi ja ohjaajalta saamasi koodi. Kivaa keskustelua!</p>
+		<br>
+		<p>Tähän tulee chattiboksi.</p>
+		Tämä on huone, jonka koodi on {{ room }}.
+		<div id="chatbox">
+			Tähän tulevat viestit puhekuplissa.
+		</div>
+		<form id="send-message">
+			<input id="writing-area" placeholder="Kirjoita jotain ja paina enter"><br>
+			<button id="leave">Poistu chatista</button>
+		</form>
+		{% endblock %}
+	</body>
+	</html>
