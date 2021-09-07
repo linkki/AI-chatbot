@@ -84,7 +84,15 @@ def home():
     
 @app.route("/join",  methods=["POST"])
 def join():
-    return render_template("chat.html")
+    name = request.form["name"]
+    code = request.form["code"]
+    if name=="":
+        return render_template("home.html", name=name, note="Kirjoita nimesi alla olevaan kentään.")
+    elif code=="":
+        return render_template("home.html", code=code, note="Lisää opettajalta saamasi koodi alla olevaan kenttään.")
+    else:
+        #Tähän kooditsekki tietokannasta ja ohjaus sen mukaisesti ihmisen tai tietokoneen luo
+        return render_template("chat.html")
     
 @app.route("/codes",  methods=["GET", "POST"])
 def create_codes():

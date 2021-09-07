@@ -9,12 +9,17 @@
 	{% block content %}
 	<h2>Tervetuloa juttelemaan!</h2>
 	<p>Tehtävänäsi on kysyä kysymyksiä ja pyrkiä selvittämään, jutteletko ihmisen vai tietokoneen kanssa. Aloita antamalla oma nimesi ja ohjaajalta saamasi koodi. Kivaa keskustelua!</p>
+	{% if note %}
+	<div class="note">
+		{{ note }}
+	</div>
+	{% endif %}
 	<form action="/join" method="POST">
 		<p>Nimi:<br>
-			<input type="text" name="name">
+			<input type="text" name="name" required value="{% if name %}{{ name }}{% endif %}">
 		</p>
 		<p>Koodi:<br>
-			<input type="text" name="code">
+			<input type="text" name="code" required value="{% if code %}{{ code }}{% endif %}">
 		</p>
 		<button type="submit">Liity keskusteluun</button>
 	</form>
