@@ -107,7 +107,7 @@ def join():
             session["ai"] = False
         else:
             session["ai"] = True
-        return render_template("chat.html", name=name)
+        return render_template("chat.html", name=name, room=code)
     
     
 @app.route("/codes",  methods=["GET", "POST"])

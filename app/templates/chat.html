@@ -34,6 +34,7 @@
 				}				
 				
 				messages.append(newMessage);
+                messages.scrollTop(messages[0].scrollHeight);
 			});
 			
 			$('#send-message').on('submit', function(evnt) {
@@ -63,8 +64,8 @@
 		<div>
 			<form id="send-message">
 				<input id="writing-area" placeholder="Kirjoita jotain ja paina enter"><br>
-				<button id="send" type="submit">Lähetä viesti</button>
-				<button id="leave">Poistu chatista</button>
+				<button id="send" type="submit">Lähetä<br>viesti</button>
+				<button id="leave">Poistu<br>chatista</button>
 			</form>
 		</div>
 		{% endblock %}

@@ -48,6 +48,7 @@ nav li a {
 	width: 70%;
 	padding: 0.75em;
 	margin: auto;
+	overflow: scroll;
 }
 
 #writing-area {
@@ -55,12 +56,49 @@ nav li a {
 	height: 30px;
 	width: 50%;
 	padding: 0.5em;
+	margin: 0.75em;
 }
 
 #send-message {
 	display: flex;
 	justify-content: center;
 }
+
+.note {
+	background-color: #FDE44A;
+	padding: 1em;
+}
+
+span.message {
+	background-color: #BED852;
+	padding: 0.25em;
+	display: inline-block;
+}
+
+span.sender-name {
+	background-color: #FA9C04;
+	padding: 0.25em;
+	display: inline-block;
+}
+
+.new-message.me {
+	text-align: right;
+}
+
+button {
+	background-color: #34E700;
+	border: 2px solid #848484;
+	height: 6em;
+	width: 6em;
+	margin: 0.5em;
+}
+
+button:hover {
+	background-color: #BED852;
+	cursor: pointer;
+}
+
+
 
 
 
