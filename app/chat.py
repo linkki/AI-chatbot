@@ -11,6 +11,12 @@ def message(message):
     name = session.get('name')
     emit('message', {'name': name, 'message': message}, room=room)
     
+@socketio.on('leave', namespace='/chat')
+def leave(message):
+    #A chatter leaves the room.
+    room = session.get('room')
+    name = session.get('name')
+    emit('status', {'name': name + 'poistui keskustelusta'}, room=room)
   
 #New chatter has joined the room
     

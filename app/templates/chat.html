@@ -34,24 +34,32 @@
 				socket.emit('text', message);
 				$('#writing-area').val("");
 			});
+			
+			$('#leave').on('click', function(evnt) {
+				socket.emit('leave');
+				socket.disconnect();
+				window.location.href = "{{ url_for('home') }}";
+			});
 		});
-		</script>
+	</script>
 		{% endblock %}
 	</head>
 	<body>
 		{% block content %}
 		<h2>Tervetuloa juttelemaan!</h2>
-		<p>Tehtävänäsi on kysyä kysymyksiä ja pyrkiä selvittämään, jutteletko ihmisen vai tietokoneen kanssa. Aloita antamalla oma nimesi ja ohjaajalta saamasi koodi. Kivaa keskustelua!</p>
-		<br>
-		<p>Tähän tulee chattiboksi.</p>
-		Tämä on huone, jonka koodi on {{ room }}.
+		<p>Tehtävänäsi on kysyä kysymyksiä ja pyrkiä selvittämään, jutteletko ihmisen vai tietokoneen kanssa. Kivaa keskustelua!</p>
+		<p>Tämä on huone, jonka koodi on {{ room }}.</p>
 		<div id="chatbox">
 			Tähän tulevat viestit puhekuplissa.
 		</div>
-		<form id="send-message">
-			<input id="writing-area" placeholder="Kirjoita jotain ja paina enter"><br>
-			<button id="leave">Poistu chatista</button>
-		</form>
+		<br>
+		<div>
+			<form id="send-message">
+				<input id="writing-area" placeholder="Kirjoita jotain ja paina enter"><br>
+				<button id="send" type="submit">Lähetä viesti</button>
+				<button id="leave">Poistu chatista</button>
+			</form>
+		</div>
 		{% endblock %}
 	</body>
 	</html>
