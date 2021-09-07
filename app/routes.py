@@ -10,6 +10,7 @@ import secrets
 def index():
     return render_template("index.html")
     
+    
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
@@ -29,15 +30,18 @@ def login():
             return redirect("/settings")
         else:
             return render_template("index.html", message=("Oijoi! Tarkista, että kirjoitit salasanasi oikein."))
+           
             
 @app.route("/logout")
 def logout():
     del session["username"]
     return redirect("/admin")
     
+    
 @app.route("/settings", methods=["POST", "GET"])
 def settings():
     return render_template("settings.html")
+    
     
 @app.route("/register", methods=["POST"])
 def register():
@@ -69,6 +73,7 @@ def register():
 
     return render_template("index.html", message=("Rekisteröityminen onnistui!"))
     
+    
 def validate_password(password1, password2):
     if len(password1) < 8:
         return("Liian lyhyt salasana! Salasanan pitää olla vähintään 8 merkin pituinen.")
@@ -78,9 +83,11 @@ def validate_password(password1, password2):
         
     return None
     
+    
 @app.route("/")
 def home():
     return render_template("home.html")
+    
     
 @app.route("/join",  methods=["POST"])
 def join():
@@ -88,15 +95,25 @@ def join():
     code = request.form["code"]
     if name=="":
         return render_template("home.html", name=name, note="Kirjoita nimesi alla olevaan kentään.")
+    elif "\"" in name:
+        return render_template("home.html", name=name, note="Et voi käyttää tätä nimeä. Keksi jokin muu.")
     elif code=="":
         return render_template("home.html", code=code, note="Lisää opettajalta saamasi koodi alla olevaan kenttään.")
     else:
-        #Tähän kooditsekki tietokannasta ja ohjaus sen mukaisesti ihmisen tai tietokoneen luo
-        return render_template("chat.html")
+        #TODO: kooditsekki: ihmis- vai tekoälykoodi
+        session["name"] = name
+        session["room"] = code
+        if code=="ihminen":
+            session["ai"] = False
+        else:
+            session["ai"] = True
+        return render_template("chat.html", name=name)
+    
     
 @app.route("/codes",  methods=["GET", "POST"])
 def create_codes():
     return render_template("codes.html")
+    
     
 @app.route("/database",  methods=["GET", "POST"])
 def update_database():

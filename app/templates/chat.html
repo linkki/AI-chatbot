@@ -16,15 +16,23 @@
 			});
 			
 			socket.on('message', function(data) {
+				// console.log(data);
 				const messages = $('#chatbox');
 				const newMessage = $('<div class="new-message"></div>');
 				
-				const sender = $('<span class="sender-name"></span>');
+				var sender = $('<span class="sender-name"></span>');
+				
 				sender.text(data.name);
 				const content = $('<span class="message"></span>'); 
 				content.text(data.message);
 				
-				newMessage.append(sender, content);
+				newMessage.append(sender, $('<br>'), content);
+				
+				const name = "{{ name }}";
+				if (name == data.name) {
+					newMessage.addClass("me");
+				}				
+				
 				messages.append(newMessage);
 			});
 			
@@ -36,7 +44,7 @@
 			});
 			
 			$('#leave').on('click', function(evnt) {
-				socket.emit('leave');
+				socket.emit('leave', {});
 				socket.disconnect();
 				window.location.href = "{{ url_for('home') }}";
 			});
@@ -48,11 +56,10 @@
 		{% block content %}
 		<h2>Tervetuloa juttelemaan!</h2>
 		<p>Tehtävänäsi on kysyä kysymyksiä ja pyrkiä selvittämään, jutteletko ihmisen vai tietokoneen kanssa. Kivaa keskustelua!</p>
-		<p>Tämä on huone, jonka koodi on {{ room }}.</p>
+		<p>Tämän keskustelun koodi on {{ room }}.</p>
 		<div id="chatbox">
 			Tähän tulevat viestit puhekuplissa.
 		</div>
-		<br>
 		<div>
 			<form id="send-message">
 				<input id="writing-area" placeholder="Kirjoita jotain ja paina enter"><br>
