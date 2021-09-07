@@ -12,7 +12,7 @@ body {
 .header {
 	background-color: #34E700;
 	margin: 0 -3em;
-	padding: 2em 0;
+	padding: 1.5em 0;
 }
 
 h1 {
@@ -44,11 +44,12 @@ nav li a {
 
 #chatbox {
 	background-color: white;
-	height: 250px;
+	height: 300px;
 	width: 70%;
 	padding: 0.75em;
 	margin: auto;
 	overflow: scroll;
+	border-radius: .4em;
 }
 
 #writing-area {
@@ -70,9 +71,46 @@ nav li a {
 }
 
 span.message {
-	background-color: #BED852;
-	padding: 0.25em;
+	padding: 0.75em;
 	display: inline-block;
+	border-radius: .4em;
+	position: relative;
+	text-align: left;
+	max-width: 90%;
+	min-width: 3%;
+	margin-top: 1.2em;
+}
+
+div.other > span.message {
+	background-color: #FFE60C;
+}
+
+div.me > span.message {
+	background-color: #9FFF28;
+}
+
+span.message:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	border: 19px solid transparent;
+	border-bottom: 0;
+	margin-left: -9.5px;
+	margin-bottom: -19px;
+}
+
+div.other > span.message:after {
+	left: 30%;
+	border-left: 0px;
+	border-top-color: #FFE60C;
+}
+
+div.me > span.message:after {
+	left: 70%;
+	border-right: 0;
+	border-top-color: #9FFF28;
 }
 
 span.sender-name {
@@ -87,18 +125,14 @@ span.sender-name {
 
 button {
 	background-color: #34E700;
-	border: 2px solid #848484;
+	border: 2px solid #08D929;
 	height: 6em;
 	width: 6em;
 	margin: 0.5em;
+	border-radius: 50%;
 }
 
 button:hover {
-	background-color: #BED852;
+	background-color: #08D929;
 	cursor: pointer;
 }
-
-
-
-
-

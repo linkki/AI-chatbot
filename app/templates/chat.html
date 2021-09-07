@@ -20,18 +20,20 @@
 				const messages = $('#chatbox');
 				const newMessage = $('<div class="new-message"></div>');
 				
-				var sender = $('<span class="sender-name"></span>');
+				/*var sender = $('<span class="sender-name"></span>');
+				sender.text(data.name);*/
 				
-				sender.text(data.name);
 				const content = $('<span class="message"></span>'); 
 				content.text(data.message);
 				
-				newMessage.append(sender, $('<br>'), content);
+				newMessage.append(content);
 				
 				const name = "{{ name }}";
 				if (name == data.name) {
 					newMessage.addClass("me");
-				}				
+				} else {
+					newMessage.addClass("other");
+				}			
 				
 				messages.append(newMessage);
                 messages.scrollTop(messages[0].scrollHeight);
