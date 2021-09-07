@@ -44,10 +44,22 @@ nav li a {
 
 #chatbox {
 	background-color: white;
+	height: 250px;
+	width: 70%;
+	padding: 0.75em;
+	margin: auto;
 }
 
 #writing-area {
 	background-color: white;
+	height: 30px;
+	width: 50%;
+	padding: 0.5em;
+}
+
+#send-message {
+	display: flex;
+	justify-content: center;
 }
 
 
