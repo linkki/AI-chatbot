@@ -2,45 +2,53 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>
-		Kirjaudu
-	</title>
+	{% extends "layout.html" %}
+	{% block title %}Kirjaudu{% endblock %}
 	<link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 <body>
-	<div class="header">
-		<h1>
-			Tekoälychatti
-		</h1>
+	{% block content %}
+	<div class="note-div">
+		{% if message %}
+		<div class="note">
+			{{ message }}
+		</div>
+		{% endif %}
 	</div>
-	{% if message %}
-	<div class="message">
-		{{ message }}
-	</div>
-	{% endif %}
+	<h3>Kirjaudu sisään</h3>
 	<div class="floating">
-		<h3>Kirjaudu sisään</h3>
-		<form action="/login" method="POST">
-			<p>Käyttäjätunnus:<br>
-				<input type="text" name="username">
-			</p>
-			<p>Salasana:<br>
-				<input type="password" name="password">
-			</p>
-			<input type="submit" text="Kirjaudu" class="is-circle">
-		</form>
+		<div class="form">
+			<form action="/login" method="POST">
+				<p>
+					<span class="input-text">Käyttäjätunnus:</span>
+					<input type="text" name="username">
+				</p>
+				<p>
+					<span class="input-text">Salasana:</span>
+					<input type="password" name="password">
+				</p>
+				<button type="submit">Kirjaudu</button>
+			</form>
+		</div>
 	</div>
 	<h3>Rekisteröidy käyttäjäksi</h3>
-	<form action="/register" method="POST" onsubmit="return check(this)">
-		<p>Käyttäjätunnus:<br>
-			<input type="text" name="username">
-		</p>
-		<p>Salasana:<br>
-			<input type="password" name="password1">
-		</p>
-		<p>Salasana uudestaan:<br>
-			<input type="password" name="password2">
-		</p>
-		<button type="submit">Rekisteröidy</button>
-	</form>
+	<div class="form">
+		<form action="/register" method="POST" onsubmit="return check(this)">
+			<p>
+				<span class="input-text">Käyttäjätunnus:</span>
+				<input type="text" name="username">
+			</p>
+			<p>
+				<span class="input-text">Salasana:</span>
+				<input type="password" name="password1">
+			</p>
+			<p>
+				<span class="input-text">Salasana uudestaan:</span>
+				<input type="password" name="password2">
+			</p>
+			<button type="submit">Lähetä</button>
+		</form>
+	</div>
+	{% endblock %}
 </body>
+</html>
