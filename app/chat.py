@@ -22,7 +22,7 @@ def message(message):
     
     if session.get('ai'):
         #Kutsutaan ai_chat-moduulin funktiota
-        emit('message', {'name': "salainen ystävä", 'message': ai_answer()}, room=room)
+        emit('message', {'name': "salainen ystävä", 'message': ai_answer(message)}, room=room)
     
 @socketio.on('leave', namespace='/chat')
 def leave(message):
