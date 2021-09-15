@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 		$(function() {
 			'use strict';
-			const socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
+			const socket = io.connect('//' + document.domain + ':' + location.port + '/chat');
 			
 			socket.on('connect', function() {
 				socket.emit('joined', {});
