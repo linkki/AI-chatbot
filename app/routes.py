@@ -103,7 +103,7 @@ def join():
         #TODO: kooditsekki: ihmis- vai tekoälykoodi
         session["name"] = name
         session["room"] = code
-        if code=="ihminen":
+        if code=="B167":
             session["ai"] = False
         else:
             session["ai"] = True
