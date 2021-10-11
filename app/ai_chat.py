@@ -10,8 +10,12 @@ from .db import keywords, fetch_id, fetch_answers
 
 def ai_answer(message):
     
-    if message == "":
-        socketio.sleep(3)
+    greetings = ["moi", "hei", "terve", "päivää vain", "moikka", "moro", "heipä hei", "päivää", "heippa"]
+    impossible = ["Tuohon kysymykseen en kyllä osaa vastata. Kysyisitkö jotain muuta?", "Jaa, se onkin hyvä kysymys. Mitä mieltä itse olet?", "Nyt en oikein ymmärrä kysymystä.", "Tuota, jaa. En osaa sanoa.", "Hmm, nyt en ole ihan varma, mitä tähän pitäisi vastata.", "Nyt täytyy myöntää, etten tiedä vastausta tähän kysymykseen. Kysy jotain helpompaa?", "En kyllä yhtään tiedä!"]
+    
+    
+    if len(message) < 3:
+        socketio.sleep(5)
         return "Mitä haluaisit kysyä seuraavaksi?"
         
     keywords_from_db = keywords()
@@ -20,17 +24,27 @@ def ai_answer(message):
     for w in words:
         w = w.casefold()
         if w in keywords_from_db:
-            id = fetch_id(w)
-            
+            id = fetch_id(w)            
             answers = fetch_answers(id)
             i = random.randint(0, len(answers)-1)
-            
             answer = answers[i]
+
+            socketio.sleep(len(answer)/10 + random.randint(0,3))
+            return answer
+
+    for w in words:
+        w = w.casefold()
+        if w in greetings:
+            i = random.randint(0, len(greetings)-1)
+            answer = (greetings[i] + "!").capitalize()
             
             socketio.sleep(len(answer)/10 + random.randint(0,3))
             return answer
-        else:
-            socketio.sleep(1)
-            return "Hei vain!"
 
+    i = random.randint(0, len(impossible)-1)
+    answer = impossible[i]
     
+    socketio.sleep(len(answer)/10 + random.randint(0,3))
+    return answer
+        
+        
