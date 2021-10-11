@@ -17,6 +17,9 @@ def ai_answer(message):
     if len(message) < 3:
         socketio.sleep(5)
         return "Mitä haluaisit kysyä seuraavaksi?"
+    
+    if message.lower().rstrip("? .,!abcdfghijklmnopqrstvxyzåäö") in ["miten menee", "mitä kuuluu"]:
+        return "Ihan hyvää kuuluu. Mitä sinulle kuuluu?"
         
     keywords_from_db = keywords()
     words = message.split()
