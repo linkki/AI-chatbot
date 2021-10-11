@@ -46,8 +46,22 @@ def fetch_answers(id):
     
     return answer_list
     
+def check_code(code):
+    "Returns 0 if code does not exist, 1 if code is a human code and 2 otherwise."
+    sql = """SELECT human
+        FROM aicb.code c
+        WHERE c.id=(:code)"""
+        
+    result = db.session.execute(sql, {"code":code})
+    answer = result.fetchone()
+    db.session.commit()  
     
-    
+    if answer is None:
+        return 0
+    elif answer[0]:
+        return 1
+    else:
+        return 2
     
     
     

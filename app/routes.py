@@ -1,7 +1,7 @@
 # Copyright (c) 2021 Veera Lupunen
 
 from . import app
-from .db import db
+from .db import db, check_code
 from flask import redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
@@ -94,19 +94,25 @@ def join():
     name = request.form["name"]
     code = request.form["code"]
     if name=="":
-        return render_template("home.html", name=name, note="Kirjoita nimesi alla olevaan kentään.")
+        return render_template("home.html", name=name, code=code, note="Kirjoita nimesi alla olevaan kentään.")
     elif "\"" in name:
-        return render_template("home.html", name=name, note="Et voi käyttää tätä nimeä. Keksi jokin muu.")
+        return render_template("home.html", name=name, code=code, note="Et voi käyttää tätä nimeä. Keksi jokin muu.")
     elif code=="":
-        return render_template("home.html", code=code, note="Lisää opettajalta saamasi koodi alla olevaan kenttään.")
+        return render_template("home.html", name=name, code=code, note="Lisää opettajalta saamasi koodi alla olevaan kenttään.")
     else:
-        #TODO: kooditsekki: ihmis- vai tekoälykoodi
+        chat_type = check_code(code)
+        
+        if chat_type == 0:
+            return render_template("home.html", name=name, code=code, note="Tarkista koodi!")
+            
         session["name"] = name
         session["room"] = code
-        if code=="B167":
+        
+        if chat_type == 1:
             session["ai"] = False
         else:
             session["ai"] = True
+            
         return render_template("chat.html", name=name, room=code)
     
     
