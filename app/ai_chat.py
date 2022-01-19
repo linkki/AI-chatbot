@@ -21,7 +21,9 @@ def ai_answer(message):
     
     for greeting in ["miten menee", "mitä kuuluu"]:
         if greeting in message:
-            return "Ihan hyvää kuuluu. Mitä sinulle kuuluu?"
+            answer = "Ihan hyvää kuuluu. Mitä sinulle kuuluu?"
+            socketio.sleep(len(answer)/10 + random.randint(0,3))
+            return answer
         
     keywords_from_db = keywords()
     words = message.split()
