@@ -57,17 +57,18 @@
 	</head>
 	<body>
 		{% block content %}
-		<h2>Tervetuloa juttelemaan!</h2>
+		<h2>Tervetuloa juttelemaan! Welcome!</h2>
 		<p>Tehtävänäsi on kysyä kysymyksiä ja pyrkiä selvittämään, jutteletko ihmisen vai tietokoneen kanssa. Kivaa keskustelua!</p>
-		<p>Tämän keskustelun koodi on {{ room }}.</p>
+		<p>Your job is to ask questions and figure out whether you're talking to a person or a computer. Happy chatting!</p>
+		<p>Tämän keskustelun koodi on/The code for this conversation is {{ room }}.</p>
 		<div id="chatbox">
-			Tähän tulevat viestit puhekuplissa.
+			Tähän tulevat viestit puhekuplissa/Here your messages are printed in speech bubbles.
 		</div>
 		<div>
 			<form id="send-message">
-				<input id="writing-area" placeholder="Kirjoita jotain ja paina enter"><br>
-				<button id="send" type="submit">Lähetä<br>viesti</button>
-				<button id="leave">Poistu<br>chatista</button>
+				<input id="writing-area" placeholder="Kirjoita jotain ja paina enter/Write something and press enter"><br>
+				<button id="send" type="submit">Lähetä viesti<br>Send message</button>
+				<button id="leave">Poistu chatista<br>Leave chat</button>
 			</form>
 		</div>
 		{% endblock %}

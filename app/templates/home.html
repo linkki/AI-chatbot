@@ -3,12 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	{% extends "layout.html" %}
-	{% block title %}Tekoälychatti{% endblock %}
+	{% block title %}Tekoälychatti - AI chat{% endblock %}
 </head>
 <body>
 	{% block content %}
-	<h2>Tervetuloa juttelemaan!</h2>
+	<h2>Tervetuloa juttelemaan! Welcome!</h2>
 	<p>Tehtävänäsi on kysyä kysymyksiä ja pyrkiä selvittämään, jutteletko ihmisen vai tietokoneen kanssa. Aloita antamalla oma nimesi ja ohjaajalta saamasi koodi. Kivaa keskustelua!</p>
+	<p>Your job is to ask questions and figure out whether you're talking to a person or a computer. Start by typing in your name and the code you got from the instructors. Happy chatting!</p>
 	{% if note %}
 	<div class="note">
 		{{ note }}
@@ -17,14 +18,14 @@
 	<div class="form">
 		<form action="/join" method="POST">
 			<p>
-				<span class="input-text">Nimi:</span>
+				<span class="input-text">Nimi/Name:</span>
 				<input type="text" name="name" required value="{% if name %}{{ name }}{% endif %}">
 			</p>
 			<p>
-				<span class="input-text">Koodi:</span>
+				<span class="input-text">Koodi/Code:</span>
 				<input type="text" name="code" required value="{% if code %}{{ code }}{% endif %}">
 			</p>
-			<button type="submit">Lähetä</button>
+			<button type="submit">Lähetä/Send</button>
 		</form>
 	</div>
 	{% endblock %}
